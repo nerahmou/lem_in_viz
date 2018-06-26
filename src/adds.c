@@ -16,6 +16,25 @@
 extern int max_x;
 extern int max_y;
 
+void	ft_add_text(t_info *tab)
+{
+	char *tmp;
+
+	if (tab->nb == 0)
+		tab->text = ft_strdup("");
+	else
+	{
+		tmp = ft_strdup(tab->text);
+		ft_strdel(&tab->text);
+		tab->text = ft_strjoin(tmp, "\n");
+		ft_strdel(&tmp);
+	}
+	tmp = ft_strdup(tab->text);
+	ft_strdel(&tab->text);
+	tab->text = ft_strjoin(tmp, tab->line);
+	ft_strdel(&tmp);
+}
+
 t_salle	*add_salle(t_salle *salle_co, char **salle, int index)
 {
 	t_salle *ptr;

@@ -65,6 +65,7 @@ void			*nettoyage_colonie(t_info *colonie)
 	free_tab(colonie->line_split);
 	colonie->salle = nettoyage_salles(colonie->salle);
 	colonie->chemins = nettoyage_chemin(colonie->chemins);
+//	close(colonie->fd);
 	return (NULL);
 }
 

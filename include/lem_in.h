@@ -56,6 +56,14 @@ typedef struct			s_chemins
 	struct s_chemins 	*next;
 }						t_chemins;
 
+typedef struct			s_ants
+{
+	char				*name;
+	int					x;
+	int					y;
+	SDL_Texture			*texture;
+	struct s_ants				*next;
+}						t_ants;
 typedef struct			s_info
 {
 	int					nb;
@@ -68,6 +76,9 @@ typedef struct			s_info
 	t_salle				*salle;
 	t_chemins			*chemins;
 	t_chemins			*chemins_un;
+	t_ants				*ants;
+	int					nb_moves;
+	int					fd;
 	FILE				*graph_file;
 }						t_info;
 
@@ -124,5 +135,6 @@ void					ft_error(t_info *colonie);
 void	create_viz(SDL_Window **window, SDL_Renderer **renderer, t_info *colonie);
 void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer, TTF_Font *Style);
 void	get_liaisons(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
+void	get_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win);
 #endif
