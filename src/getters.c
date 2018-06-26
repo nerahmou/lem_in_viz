@@ -13,6 +13,16 @@
 
 #include "lem_in.h"
 
+t_ants	*get_ant_from_name(t_ants *ants, char *name)
+{
+	t_ants *tmp;
+
+	tmp = ants;
+	while (ft_strcmp(tmp->name, name))
+		tmp = tmp->next;
+	return (tmp);
+}
+
 int		get_room(t_info *colonie)
 {
 	t_salle *tmp;

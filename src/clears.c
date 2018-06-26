@@ -43,28 +43,12 @@ t_salle			*nettoyage_salles(t_salle *salle)
 	return (NULL);
 }
 
-t_chemins		*nettoyage_chemin(t_chemins *chemin)
-{
-	t_chemins *tmp;
-
-	while (chemin)
-	{
-		chemin->salle = nettoyage_salle2(chemin->salle);
-		tmp = chemin->next;
-		free(chemin);
-		chemin = NULL;
-		chemin = tmp;
-	}
-	return (NULL);
-}
-
 void			*nettoyage_colonie(t_info *colonie)
 {
-	ft_strdel(&colonie->text);
+	//ft_strdel(&colonie->text);
 	ft_strdel(&colonie->line);
 	free_tab(colonie->line_split);
 	colonie->salle = nettoyage_salles(colonie->salle);
-	colonie->chemins = nettoyage_chemin(colonie->chemins);
 //	close(colonie->fd);
 	return (NULL);
 }

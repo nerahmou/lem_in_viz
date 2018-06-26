@@ -13,21 +13,6 @@
 
 #include <lem_in.h>
 
-t_salle_2	*nettoyage_salle2(t_salle_2 *salle)
-{
-	t_salle_2 *tmp;
-
-	while (salle)
-	{
-		ft_strdel(&salle->name);
-		tmp = salle->next;
-		free(salle);
-		salle = NULL;
-		salle = tmp;
-	}
-	return (NULL);
-}
-
 void		ft_error(t_info *colonie)
 {
 	ft_printf("Error\n");

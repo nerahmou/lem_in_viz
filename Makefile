@@ -32,7 +32,14 @@ SRC_LEM =	main.c\
 			getters_salles.c\
 			adds.c\
 			ft_error.c\
-			create_viz.c
+			create_viz.c\
+			create_ants.c\
+			create_lines.c\
+			create_room.c\
+			get_events.c\
+			exit.c\
+			setters_viz.c\
+			refresh.c
 
 SRC_LEM_IN = $(addprefix $(LEM_PATH),$(SRC_LEM))
 OBJ_LEM_PATH = obj/
@@ -44,4 +51,4 @@ NAME = viz
 
 
 all:
-	gcc $(SRC_LEM_IN) -o viz -I include -L lib -lft -framework SDL2 -framework SDL2_image -framework SDL2_ttf
+	gcc -v $(SRC_LEM_IN) -o viz -I include -L lib -lft -framework SDL2 -framework SDL2_image -framework SDL2_ttf
