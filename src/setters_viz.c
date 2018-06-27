@@ -24,14 +24,22 @@ void	set_nb_moves_text(t_info *colonie, SDL_Renderer *renderer)
 	SDL_Surface *surface;
 	char		*text;
 	char		*tmp;
+	char		*tmp2;
 
 	tmp = ft_itoa(colonie->nb_moves);
 	text = ft_strjoin("Nombre de coups : ", tmp);
+	ft_strdel(&tmp);
+	tmp = ft_itoa(colonie->nb);
+	tmp2 = ft_strjoin(" | Nombre de fourmis : ", tmp);
+	ft_strdel(&tmp);
+	tmp = text;
+	text = ft_strjoin(text, tmp2);
+	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
 	surface = TTF_RenderText_Solid(colonie->style, text , White);
-	colonie->nb_moves_rect = set_rectangle(50, h - 100, 500, 50);
+	colonie->nb_moves_rect = set_rectangle(30, h - 70, 600, 50);
 	colonie->nb_moves_text = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
-	ft_strdel(&tmp);
 	ft_strdel(&text);
 }
 

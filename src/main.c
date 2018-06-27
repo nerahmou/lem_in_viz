@@ -50,13 +50,14 @@ void	init_colonie(t_info *colonie)
 		exit_with_erro("FD open", NULL, NULL, NULL);
 }
 
-void	get_colonie(t_info *colonie)
+int	get_colonie(t_info *colonie)
 {
 	while (get_next_line(0, &colonie->line) && ft_strcmp("", colonie->line))
 	{
 		ft_check_and_add(colonie);
 		ft_strdel(&colonie->line);
 	}
+	return (colonie->nb);
 }
 
 void	file_puts(t_info *colonie)
@@ -66,11 +67,8 @@ void	file_puts(t_info *colonie)
 	while (get_next_line(0, &colonie->line))
 	{
 		colonie->nb_moves++;
-		line_tmp = colonie->line;
-		colonie->line = ft_strtrim(colonie->line);
 		write(colonie->fd, colonie->line, ft_strlen(colonie->line));
 		write(colonie->fd, "\n", 1);
-		ft_strdel(&line_tmp);
 		ft_strdel(&colonie->line);
 	}
 }
@@ -81,12 +79,15 @@ int main(int argc, char *argv[])
 	SDL_Renderer	*renderer;
 	t_info			colonie;
 
+	window = NULL;
+	renderer = NULL;
 	init_colonie(&colonie);
-	get_colonie(&colonie);
-		file_puts(&colonie);
-	create_viz(window, renderer, &colonie);
+	if (!get_colonie(&colonie))
+		ft_error(&colonie);
+	file_puts(&colonie);
+	renderer = create_viz(window, renderer, &colonie);
 	lseek(colonie.fd, 0, SEEK_SET);
-	get_events(colonie, renderer);
+	get_events(colonie, window, renderer);
 	nettoyage_colonie(&colonie);
 	exit_viz(&colonie, renderer, window, 0);
 	return 0;

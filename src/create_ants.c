@@ -17,8 +17,8 @@ t_ants	*create_ant(t_info *colonie, int i, SDL_Renderer *renderer, SDL_Window *w
 	nb_tmp = ft_itoa(i);
 	new->name = (ft_strjoin("L", nb_tmp));
 	new->ant_texture = colonie->ant_image;
-	new->ant_rect = set_rectangle((colonie->start->x * w) / max_x,
-			(colonie->start->y * h) / max_y, 50, 50);
+	new->ant_rect = set_rectangle((colonie->start->x),
+			colonie->start->y, 50, 50);
 	new->next = NULL;
 	if (tmp)
 	{
@@ -36,8 +36,8 @@ void	get_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	colonie->ant_image = IMG_LoadTexture(renderer, "img/antr.png");
-	while (++i < colonie->nb)
+	while (++i <= colonie->nb)
 		colonie->ants = create_ant(colonie, i, renderer, window);
 }

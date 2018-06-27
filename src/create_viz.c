@@ -24,9 +24,14 @@ extern SDL_Color White;
 extern SDL_Color Red;
 extern SDL_Color Green;
 
-void	create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie)
+
+
+SDL_Renderer	*create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	int result = 0;
+    int flags = MIX_INIT_MP3;
+	
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 		exit_with_erro("Init", renderer, window, colonie);
 	window = SDL_CreateWindow("LEM_IN", SDL_WINDOWPOS_UNDEFINED,
 			SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN_DESKTOP);
@@ -37,11 +42,11 @@ void	create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie)
 	set_style(colonie);
 	set_nb_moves_text(colonie, renderer);
 	set_options_menu(colonie, renderer);
-	w -= 250;
-	h -= 200;
+	w -= (w / 4);
+	h -= (h / 4);
 	get_lines(colonie, window, renderer);
 	get_rooms(colonie, window, renderer);
 	get_ants(colonie, window, renderer);
 	refresh(colonie, window, renderer);
-	SDL_RenderPresent(renderer);
+	return renderer;
 }

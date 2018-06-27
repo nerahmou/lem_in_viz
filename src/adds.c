@@ -25,8 +25,8 @@ t_salle	*add_salle(t_salle *salle_co, char **salle, int index)
 	link = malloc(sizeof(t_salle));
 	link->name = ft_strdup(salle[0]);
 	link->index = index;
-	link->x = ft_atoi(salle[1]) + 1;
-	link->y = ft_atoi(salle[2]) + 1;
+	link->x = ft_atoi(salle[1]) + 2;
+	link->y = ft_atoi(salle[2]) + 2;
 	if (link->x > max_x)
 		max_x = link->x;
 	if (link->y > max_y)

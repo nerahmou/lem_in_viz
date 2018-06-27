@@ -51,4 +51,4 @@ NAME = viz
 
 
 all:
-	gcc -v $(SRC_LEM_IN) -o viz -I include -L lib -lft -framework SDL2 -framework SDL2_image -framework SDL2_ttf
+	gcc  $(SRC_LEM_IN) -o viz -I include -L lib -lft -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer

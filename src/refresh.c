@@ -1,5 +1,17 @@
 #include "lem_in.h"
 
+void		refresh_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
+{
+	t_ants *ants;
+
+	ants = colonie->ants;
+	while (ants)
+	{
+		SDL_RenderCopy(rend, ants->ant_texture, NULL, ants->ant_rect);
+		ants = ants->next;
+	}
+}
+
 void		refresh_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 {
 	t_room	*rooms;
@@ -27,7 +39,6 @@ void		refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	t_line	*line;
 
 	line = colonie->lines;
-
 	SDL_RenderClear(rend);
 	SDL_RenderCopy(rend, colonie->background, NULL, colonie->bg_rect);
 	SDL_RenderCopy(rend, colonie->nb_moves_text, NULL, colonie->nb_moves_rect);
@@ -41,4 +52,6 @@ void		refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 		line = line->next;
 	}
 	refresh_rooms(colonie, window, rend);
+	refresh_ants(colonie, window, rend);
+	SDL_RenderPresent(rend);
 }

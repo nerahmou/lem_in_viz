@@ -36,7 +36,7 @@ void	set_text_room(t_room *new, char *name, t_info *colonie,
 	SDL_FreeSurface(surface);
 }
 
-t_room	*create_room(t_info *colonie, t_salle *salle, SDL_Renderer *renderer,
+t_room	*create_room(t_info *colonie, t_salle **salle, SDL_Renderer *renderer,
 		SDL_Window *window)
 {
 	t_room	*new;
@@ -45,14 +45,14 @@ t_room	*create_room(t_info *colonie, t_salle *salle, SDL_Renderer *renderer,
 	if (!(new = malloc(sizeof(*new))))
 		exit(1);
 	tmp = colonie->room;
-	new->room_rect = set_rectangle((salle->x * w) / max_x,
-			(salle->y * h) / max_y, 50, 50);
-	new->room_text_r = set_rectangle((salle->x * w) / max_x - 25,
-			(salle->y * h) / max_y - 100, 100, 80);
+	(*salle)->x = ((*salle)->x * w) / max_x;
+	(*salle)->y = ((*salle)->y * h) / max_y;
+	new->room_rect = set_rectangle((*salle)->x, (*salle)->y, 50, 50);
+	new->room_text_r = set_rectangle((*salle)->x - 25, (*salle)->y - 80, 100, 80);
 	new->room = NULL;
 	new->next = NULL;
-	check_room_index(&new, salle->index, colonie, renderer);
-	set_text_room(new, salle->name, colonie, renderer);
+	check_room_index(&new, (*salle)->index, colonie, renderer);
+	set_text_room(new, (*salle)->name, colonie, renderer);
 	if (tmp)
 	{
 		while (tmp->next)
@@ -72,7 +72,7 @@ void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 	salle = colonie->salle;
 	while (salle)
 	{
-		colonie->room = create_room(colonie, salle, renderer, window);
+		colonie->room = create_room(colonie, &salle, renderer, window);
 		salle = salle->next;
 	}
 }

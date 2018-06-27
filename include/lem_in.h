@@ -21,6 +21,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2_mixer/SDL_mixer.h>
 
 typedef struct			s_salle t_salle;
 
@@ -49,14 +50,6 @@ typedef struct			s_chemins
 	struct s_chemins 	*next;
 }						t_chemins;
 
-typedef struct			s_ants
-{
-	char				*name;
-	SDL_Rect			*ant_rect;
-	SDL_Texture			*ant_texture;
-	struct s_ants		*next;
-}						t_ants;
-
 typedef struct			s_room
 {
 	SDL_Texture			*room;
@@ -67,6 +60,22 @@ typedef struct			s_room
 	SDL_Rect			*room_text_r;
 	struct s_room		*next;
 }						t_room;
+
+typedef struct			s_ants
+{
+	char				*name;
+	SDL_Rect			*ant_rect;
+	SDL_Texture			*ant_texture;
+	struct s_ants		*next;
+}						t_ants;
+
+typedef struct			s_ant_move
+{
+	t_ants				*ant;
+	t_salle				*dest;
+	bool				to_move;
+	struct s_ant_move	*next;
+}						t_ant_move;
 
 typedef struct			s_line
 {
@@ -107,6 +116,9 @@ typedef struct			s_info
 	SDL_Texture			*ant_image;
 
 	t_line				*lines;
+
+	Mix_Music			*music;
+	Mix_Chunk			*sound;
 }						t_info;
 
 void					ft_add_text(t_info *tab);
@@ -151,14 +163,15 @@ void					exit_error(t_info *colonie);
 void					ft_error(t_info *colonie);
 
 
-void	create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie);
+SDL_Renderer *create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie);
 void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 void	get_lines(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 void	get_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
+t_ants	*get_ant_from_name(t_ants *ants, char *name);
 void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int signal);
 void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win, t_info *colonie);
 
-void	get_events(t_info colonie, SDL_Renderer *renderer);
+void	get_events(t_info colonie, SDL_Window *window, SDL_Renderer *renderer);
 SDL_Rect	*set_rectangle(int x, int y, int w, int h);
 void	set_nb_moves_text(t_info *colonie, SDL_Renderer *renderer);
 void	set_background(t_info *colonie, SDL_Renderer *renderer);

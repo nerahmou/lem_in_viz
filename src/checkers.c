@@ -64,7 +64,7 @@ void	ft_check_and_add(t_info *colonie)
 {
 	if (colonie->nb == 0)
 	{
-		if (check_digit(colonie->line) == 0)
+		if (!check_digit(colonie->line))
 			colonie->nb = ft_atoi(colonie->line);
 		else
 			ft_error(colonie);
