@@ -6,7 +6,7 @@ extern int max_x;
 extern int max_y;
 extern SDL_Color White;
 
-SDL_Rect	*set_rectangle(int x, int y, int w, int h)
+SDL_Rect	*set_rec(int x, int y, int w, int h)
 {
 	SDL_Rect *new;
 
@@ -19,7 +19,7 @@ SDL_Rect	*set_rectangle(int x, int y, int w, int h)
 	return (new);
 }
 
-void	set_nb_moves_text(t_info *colonie, SDL_Renderer *renderer)
+void	set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 {
 	SDL_Surface *surface;
 	char		*text;
@@ -37,34 +37,40 @@ void	set_nb_moves_text(t_info *colonie, SDL_Renderer *renderer)
 	ft_strdel(&tmp);
 	ft_strdel(&tmp2);
 	surface = TTF_RenderText_Solid(colonie->style, text , White);
-	colonie->nb_moves_rect = set_rectangle(30, h - 70, 600, 50);
+	if (!surface)
+		exit_with_erro("Text surface", renderer, window, colonie);
+	colonie->nb_moves_rect = set_rec(30, h - 70, 600, 50);
 	colonie->nb_moves_text = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!colonie->nb_moves_text)
+		exit_with_erro("Text texture", renderer, window, colonie);
 	SDL_FreeSurface(surface);
 	ft_strdel(&text);
 }
 
-void	set_background(t_info *colonie, SDL_Renderer *renderer)
+void	set_background_and_text_style(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 {
 	colonie->background = IMG_LoadTexture(renderer, "img/sol.jpg");
-	colonie->bg_rect = set_rectangle(0, 0, w, h);
-}
-
-void	set_style(t_info *colonie)
-{
+	if (!colonie->background)
+		exit_with_erro("Background image", renderer, window, colonie);
+	colonie->bg_rect = set_rec(0, 0, w, h);
 	if (TTF_Init() == -1)
-		exit(ft_printf("sss"));
+		exit_with_erro("Init style", renderer, window, colonie);
 	colonie->style = TTF_OpenFont("style/arial.ttf", 250);
-	if (colonie->style == NULL)
-		exit(1);
+	if (!colonie->style)
+		exit_with_erro("Open style", renderer, window, colonie);
 }
 
-void	set_options_menu(t_info *colonie, SDL_Renderer *renderer)
+void	set_options_menu(t_info *colonie, SDL_Window *window,  SDL_Renderer *renderer)
 {
 	SDL_Surface *surface;
 
 	surface = TTF_RenderText_Solid(colonie->style, "[Esc : EXIT | Space : MOVE]", White);
+	if (!surface)
+		exit_with_erro("Options surface", renderer, window, colonie);
 	colonie->options_menu_text = SDL_CreateTextureFromSurface(renderer, surface);
-	colonie->options_menu_rect = set_rectangle(w / 4, 10, 800, 50);
+	if (!colonie->options_menu_text)
+		exit_with_erro("Options texture", renderer, window, colonie);
+	colonie->options_menu_rect = set_rec(w / 4, 10, 800, 50);
 	SDL_FreeSurface(surface);
 }
 

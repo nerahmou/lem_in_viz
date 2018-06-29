@@ -24,29 +24,29 @@ extern SDL_Color White;
 extern SDL_Color Red;
 extern SDL_Color Green;
 
-
-
-SDL_Renderer	*create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie)
+void	create_viz(SDL_Window **window, SDL_Renderer **rend, t_info *colonie)
 {
 	int result = 0;
     int flags = MIX_INIT_MP3;
-	
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
-		exit_with_erro("Init", renderer, window, colonie);
-	window = SDL_CreateWindow("LEM_IN", SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	SDL_SetWindowTitle(window, "LEM_IN");
-	SDL_GetRendererOutputSize(renderer, &w, &h);
-	set_background(colonie, renderer);
-	set_style(colonie);
-	set_nb_moves_text(colonie, renderer);
-	set_options_menu(colonie, renderer);
+		exit_with_erro("Init", *rend, *window, colonie);
+	if (!(*window = SDL_CreateWindow("LEM_IN", SDL_WINDOWPOS_UNDEFINED,
+										SDL_WINDOWPOS_UNDEFINED, 640, 480,
+										SDL_WINDOW_FULLSCREEN_DESKTOP)))
+		exit_with_erro("Create window", *rend, *window, colonie);
+	if (!(*rend = SDL_CreateRenderer(*window, -1,
+										SDL_RENDERER_ACCELERATED)))
+		exit_with_erro("Create rend", *rend, *window, colonie);
+	SDL_SetWindowTitle(*window, "LEM_IN");
+	SDL_GetRendererOutputSize(*rend, &w, &h);
+	set_background_and_text_style(colonie, *window, *rend);
+	set_text(colonie, *window, *rend);
+	set_options_menu(colonie, *window, *rend);
 	w -= (w / 4);
 	h -= (h / 4);
-	get_lines(colonie, window, renderer);
-	get_rooms(colonie, window, renderer);
-	get_ants(colonie, window, renderer);
-	refresh(colonie, window, renderer);
-	return renderer;
+	get_lines(colonie, *window, *rend);
+	get_rooms(colonie, *window, *rend);
+	get_ants(colonie, *window, *rend);
+	refresh(colonie, *window, *rend);
 }

@@ -121,4 +121,5 @@ int					ft_intlen(intmax_t n, int base);
 size_t				ft_lstlen(void *lst, void*(*ptr)(void*));
 int					ft_strchr_occur(char *s, int c);
 int					ft_tablength(char **tab);
+double				ft_double_abs(double d);
 #endif

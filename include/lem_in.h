@@ -156,14 +156,17 @@ void					ft_print_chemins(t_chemins *chemin);
 void					ft_print_chemins_rev(t_chemins *chemin);
 
 void					free_tab(char **tab);
+void	free_multi_str(const char *str, ...);
 t_connection			*nettoyage_connections(t_connection *connection);
 t_salle					*nettoyage_salles(t_salle *salle);
 void					*nettoyage_colonie(t_info *colonie);
 void					exit_error(t_info *colonie);
 void					ft_error(t_info *colonie);
 
+void	init_colonie(t_info *colonie);
+void	init_sound(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 
-SDL_Renderer *create_viz(SDL_Window *window, SDL_Renderer *renderer, t_info *colonie);
+void	create_viz(SDL_Window **window, SDL_Renderer **renderer, t_info *colonie);
 void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 void	get_lines(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 void	get_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
@@ -172,12 +175,18 @@ void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int signal);
 void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win, t_info *colonie);
 
 void	get_events(t_info colonie, SDL_Window *window, SDL_Renderer *renderer);
-SDL_Rect	*set_rectangle(int x, int y, int w, int h);
-void	set_nb_moves_text(t_info *colonie, SDL_Renderer *renderer);
-void	set_background(t_info *colonie, SDL_Renderer *renderer);
-void	set_options_menu(t_info *colonie, SDL_Renderer *renderer);
+SDL_Rect	*set_rec(int x, int y, int w, int h);
+void	set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
+void	set_background_and_text_style(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
+void	set_options_menu(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
 SDL_Color	*set_color(int r, int g, int b, int a);
-void	set_style(t_info *colonie);
+
+void		move_ants(t_info *colonie, char *str, SDL_Window *window, SDL_Renderer *renderer);
+int			to_move(t_ant_move *ant_move);
+int			check_go_over(int positive, int src, int dest, t_ant_move *ant_move);
+t_ant_move	*init_ant_to_move(t_info *colonie, t_ant_move **ant_move, char *str);
+t_ant_move	*push_ant_move(t_ant_move *ant_move, t_ants *ant, t_salle *room);
+void		destroy_ant_to_move(t_ant_move **ant_move);
 
 void		refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend);
 #endif

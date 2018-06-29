@@ -7,7 +7,8 @@ void		refresh_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	ants = colonie->ants;
 	while (ants)
 	{
-		SDL_RenderCopy(rend, ants->ant_texture, NULL, ants->ant_rect);
+		if (SDL_RenderCopy(rend, ants->ant_texture, NULL, ants->ant_rect) < 0)
+				exit_with_erro("Render copy6", rend, window, colonie);
 		ants = ants->next;
 	}
 }
@@ -20,16 +21,21 @@ void		refresh_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	while (rooms)
 	{
 		if (rooms->room != NULL)
-			SDL_RenderCopy(rend, rooms->room, NULL, rooms->room_rect);
+		{
+			if (SDL_RenderCopy(rend, rooms->room, NULL, rooms->room_rect) < 0)
+				exit_with_erro("Render copy4", rend, window, colonie);
+		}
 		else
 		{
 			SDL_SetRenderDrawColor(rend, rooms->room_color->r,
 											rooms->room_color->g,
 												rooms->room_color->b,
 													rooms->room_color->a);
-			SDL_RenderFillRect(rend, rooms->room_rect);
+			if (SDL_RenderFillRect(rend, rooms->room_rect) < 0)
+				exit_with_erro("Fill Rect", rend, window, colonie);
 		}
-		SDL_RenderCopy(rend, rooms->room_text_t, NULL, rooms->room_text_r);
+			if (SDL_RenderCopy(rend, rooms->room_text_t, NULL, rooms->room_text_r) < 0)
+				exit_with_erro("Render copy5", rend, window, colonie);
 		rooms = rooms->next;
 	}
 }
@@ -39,16 +45,21 @@ void		refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	t_line	*line;
 
 	line = colonie->lines;
-	SDL_RenderClear(rend);
-	SDL_RenderCopy(rend, colonie->background, NULL, colonie->bg_rect);
-	SDL_RenderCopy(rend, colonie->nb_moves_text, NULL, colonie->nb_moves_rect);
-	SDL_RenderCopy(rend, colonie->options_menu_text, NULL, 
-												colonie->options_menu_rect);
+	if (SDL_RenderClear(rend) < 0)
+		exit_with_erro("Render clear", rend, window, colonie);
+	if (SDL_RenderCopy(rend, colonie->background, NULL, colonie->bg_rect) < 0)
+		exit_with_erro("Render copy1", rend, window, colonie);
+	if (SDL_RenderCopy(rend, colonie->nb_moves_text, NULL, colonie->nb_moves_rect) < 0)
+		exit_with_erro("Render copy2", rend, window, colonie);
+	if (SDL_RenderCopy(rend, colonie->options_menu_text, NULL, 
+												colonie->options_menu_rect) < 0)
+		exit_with_erro("Render copy3", rend, window, colonie);
 	SDL_SetRenderDrawColor(rend, 255, 255, 255, 0);
 	while (line)
 	{
-		SDL_RenderDrawLine(rend, line->src_x, line->src_y,
-									line->dst_x, line->dst_y);
+		if (SDL_RenderDrawLine(rend, line->src_x, line->src_y,
+									line->dst_x, line->dst_y) < 0)
+		exit_with_erro("Render DrawLine", rend, window, colonie);
 		line = line->next;
 	}
 	refresh_rooms(colonie, window, rend);

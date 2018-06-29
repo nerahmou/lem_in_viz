@@ -23,33 +23,6 @@ SDL_Color Red = {220,20,60};
 SDL_Color Green = {0, 255, 0};
 
 
-void	init_colonie(t_info *colonie)
-{
-	colonie->nb = 0;
-	colonie->index = 0;
-	colonie->line = NULL;
-	colonie->line_split = NULL;
-	colonie->start = NULL;
-	colonie->end = NULL;
-	colonie->salle = NULL;
-	colonie->ants = NULL;
-	colonie->nb_moves = 0;
-	colonie->room = NULL;
-	colonie->ants = NULL;
-	colonie->ant_image = NULL;
-	colonie->lines = NULL;
-	colonie->style = NULL;
-	colonie->background = NULL;
-	colonie->bg_rect = NULL;
-	colonie->nb_moves_text = NULL;
-	colonie->nb_moves_rect = NULL;
-	colonie->options_menu_text = NULL;
-	colonie->options_menu_rect = NULL;
-	colonie->fd = open("moves", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-	if (colonie->fd == -1)
-		exit_with_erro("FD open", NULL, NULL, NULL);
-}
-
 int	get_colonie(t_info *colonie)
 {
 	while (get_next_line(0, &colonie->line) && ft_strcmp("", colonie->line))
@@ -85,10 +58,9 @@ int main(int argc, char *argv[])
 	if (!get_colonie(&colonie))
 		ft_error(&colonie);
 	file_puts(&colonie);
-	renderer = create_viz(window, renderer, &colonie);
+	create_viz(&window, &renderer, &colonie);
 	lseek(colonie.fd, 0, SEEK_SET);
 	get_events(colonie, window, renderer);
-	nettoyage_colonie(&colonie);
 	exit_viz(&colonie, renderer, window, 0);
 	return 0;
 }

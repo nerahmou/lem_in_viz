@@ -31,7 +31,6 @@ SRC_LEM =	main.c\
 			clears.c\
 			getters_salles.c\
 			adds.c\
-			ft_error.c\
 			create_viz.c\
 			create_ants.c\
 			create_lines.c\
@@ -39,7 +38,11 @@ SRC_LEM =	main.c\
 			get_events.c\
 			exit.c\
 			setters_viz.c\
-			refresh.c
+			refresh.c\
+			init.c\
+			move_ants.c\
+			move_ants2.c
+			
 
 SRC_LEM_IN = $(addprefix $(LEM_PATH),$(SRC_LEM))
 OBJ_LEM_PATH = obj/

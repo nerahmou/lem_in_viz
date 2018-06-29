@@ -6,7 +6,7 @@ extern int max_x;
 extern int max_y;
 extern SDL_Color White;
 
-void	check_room_index(t_room **room, int index, t_info *colonie,
+int		check_room_index(t_room **room, int index, t_info *colonie,
 		SDL_Renderer *renderer)
 {
 	t_room *new;
@@ -16,6 +16,8 @@ void	check_room_index(t_room **room, int index, t_info *colonie,
 	{
 		new->room = IMG_LoadTexture(renderer, "img/end.png");
 		new->room_color = set_color(255, 255, 255, 0);
+		if (!new->room)
+			return (1);
 	}
 	else
 	{
@@ -24,16 +26,22 @@ void	check_room_index(t_room **room, int index, t_info *colonie,
 		else
 			new->room_color = set_color(255, 255, 255, 0);
 	}
+	return (0);
 }
 
-void	set_text_room(t_room *new, char *name, t_info *colonie,
+int		set_text_room(t_room *new, char *name, t_info *colonie,
 		SDL_Renderer *renderer)
 {
 	SDL_Surface *surface;
 
 	surface = TTF_RenderText_Solid(colonie->style, name, White);
+	if (!surface)
+		return (1);
 	new->room_text_t = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!new->room_text_t)
+		return (1);
 	SDL_FreeSurface(surface);
+	return (0);
 }
 
 t_room	*create_room(t_info *colonie, t_salle **salle, SDL_Renderer *renderer,
@@ -47,12 +55,14 @@ t_room	*create_room(t_info *colonie, t_salle **salle, SDL_Renderer *renderer,
 	tmp = colonie->room;
 	(*salle)->x = ((*salle)->x * w) / max_x;
 	(*salle)->y = ((*salle)->y * h) / max_y;
-	new->room_rect = set_rectangle((*salle)->x, (*salle)->y, 50, 50);
-	new->room_text_r = set_rectangle((*salle)->x - 25, (*salle)->y - 80, 100, 80);
+	new->room_rect = set_rec((*salle)->x, (*salle)->y, 50, 50);
+	new->room_text_r = set_rec((*salle)->x - 25, (*salle)->y - 80, 100, 80);
 	new->room = NULL;
 	new->next = NULL;
-	check_room_index(&new, (*salle)->index, colonie, renderer);
-	set_text_room(new, (*salle)->name, colonie, renderer);
+	if (check_room_index(&new, (*salle)->index, colonie, renderer))
+		exit_with_erro("Image room end", renderer, window, colonie);
+	if (set_text_room(new, (*salle)->name, colonie, renderer))
+		exit_with_erro("Text room", renderer, window, colonie);
 	if (tmp)
 	{
 		while (tmp->next)
