@@ -55,18 +55,21 @@ NAME = viz
 all: $(NAME)
 
 $(NAME): $(OBJ_LEM_PATH) $(OBJ)
-	$(CC) -L $(LIB_PATH) $(INC_LIBS) $(OBJ) -I $(LIB_PATH) -o $@
+	@make -C $(LIB_PATH)libft re
+	@mv $(LIB_PATH)libft/libft.a ..
+	@$(CC) -L $(LIB_PATH) $(INC_LIBS) $(OBJ) -I $(LIB_PATH) -o $@
+	@echo "Viz created 👍 \n"
 
 $(OBJ_LEM_PATH):
-	mkdir $@
+	@mkdir $@
 
 $(OBJ_LEM_PATH)%.o: $(LEM_PATH)%.c $(INCLUDES_FILES)
-	$(CC) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
+	@$(CC) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
 
 clean:
-	rm -rf $(OBJ_LEM_PATH)
+	@rm -rf $(OBJ_LEM_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
