@@ -6,7 +6,7 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/29 13:51:21 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 20:16:07 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 20:19:56 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <wchar.h>
 # include "ft_printf.h"
-
 
 typedef struct		s_list
 {

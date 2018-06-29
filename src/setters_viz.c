@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   setters_viz.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:28:59 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 21:00:43 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-extern int w;
-extern int h;
-extern int max_x;
-extern int max_y;
-extern SDL_Color White;
+extern int g_w;
+extern int g_h;
+extern SDL_Color g_white;
 
 SDL_Rect	*set_rec(int x, int y, int w, int h)
 {
@@ -19,7 +30,20 @@ SDL_Rect	*set_rec(int x, int y, int w, int h)
 	return (new);
 }
 
-void	set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
+SDL_Color	*set_color(int r, int g, int b, int a)
+{
+	SDL_Color *new;
+
+	if (!(new = malloc(sizeof(*new))))
+		exit(1);
+	new->r = r;
+	new->g = g;
+	new->b = b;
+	new->a = a;
+	return (new);
+}
+
+void		set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 {
 	SDL_Surface *surface;
 	char		*text;
@@ -36,23 +60,24 @@ void	set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 	text = ft_strjoin(text, tmp2);
 	ft_strdel(&tmp);
 	ft_strdel(&tmp2);
-	surface = TTF_RenderText_Solid(colonie->style, text , White);
+	surface = TTF_RenderText_Solid(colonie->style, text, g_white);
 	if (!surface)
-		exit_with_erro("Text surface", renderer, window, colonie);
-	colonie->nb_moves_rect = set_rec(30, h - 70, 600, 50);
-	colonie->nb_moves_text = SDL_CreateTextureFromSurface(renderer, surface);
+		exit_with_erro("Text surface", rend, window, colonie);
+	colonie->nb_moves_rect = set_rec(30, g_h - 70, 600, 50);
+	colonie->nb_moves_text = SDL_CreateTextureFromSurface(rend, surface);
 	if (!colonie->nb_moves_text)
-		exit_with_erro("Text texture", renderer, window, colonie);
+		exit_with_erro("Text texture", rend, window, colonie);
 	SDL_FreeSurface(surface);
 	ft_strdel(&text);
 }
 
-void	set_background_and_text_style(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
+void		set_background_and_text_style(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer)
 {
 	colonie->background = IMG_LoadTexture(renderer, "img/sol.jpg");
 	if (!colonie->background)
 		exit_with_erro("Background image", renderer, window, colonie);
-	colonie->bg_rect = set_rec(0, 0, w, h);
+	colonie->bg_rect = set_rec(0, 0, g_w, g_h);
 	if (TTF_Init() == -1)
 		exit_with_erro("Init style", renderer, window, colonie);
 	colonie->style = TTF_OpenFont("style/arial.ttf", 250);
@@ -60,31 +85,18 @@ void	set_background_and_text_style(t_info *colonie, SDL_Window *window, SDL_Rend
 		exit_with_erro("Open style", renderer, window, colonie);
 }
 
-void	set_options_menu(t_info *colonie, SDL_Window *window,  SDL_Renderer *renderer)
+void		set_options_menu(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *rend)
 {
 	SDL_Surface *surface;
 
-	surface = TTF_RenderText_Solid(colonie->style, "[Esc : EXIT | Space : MOVE]", White);
+	surface = TTF_RenderText_Solid(colonie->style,
+			"[Esc : EXIT | Space : MOVE]", g_white);
 	if (!surface)
-		exit_with_erro("Options surface", renderer, window, colonie);
-	colonie->options_menu_text = SDL_CreateTextureFromSurface(renderer, surface);
+		exit_with_erro("Options surface", rend, window, colonie);
+	colonie->options_menu_text = SDL_CreateTextureFromSurface(rend, surface);
 	if (!colonie->options_menu_text)
-		exit_with_erro("Options texture", renderer, window, colonie);
-	colonie->options_menu_rect = set_rec(w / 4, 10, 800, 50);
+		exit_with_erro("Options texture", rend, window, colonie);
+	colonie->options_menu_rect = set_rec(g_w / 3, 10, 800, 50);
 	SDL_FreeSurface(surface);
 }
-
-SDL_Color	*set_color(int r, int g, int b, int a)
-{
-	SDL_Color *new;
-
-	if (!(new = malloc(sizeof(*new))))
-		exit(1);
-	new->r = r;
-	new->g = g;
-	new->b = b;
-	new->a = a;
-	return (new);
-}
-
-

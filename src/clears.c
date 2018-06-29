@@ -6,25 +6,12 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/30 14:36:19 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/18 14:30:43 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 20:48:53 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void			free_tab(char **tab)
-{
-	int i;
-
-	i = 0;
-	if (tab)
-	{
-		while (tab[i])
-			ft_strdel(&tab[i++]);
-		free(tab);
-	}
-}
 
 t_ants			*nettoyage_ants(t_ants *ants)
 {
@@ -112,5 +99,3 @@ void			*nettoyage_colonie(t_info *colonie)
 	}
 	return (NULL);
 }
-
-

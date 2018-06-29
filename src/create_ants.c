@@ -1,9 +1,17 @@
-#include "lem_in.h"
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   create_ants.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:40 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:34:59 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
 
-extern int w;
-extern int h;
-extern int max_x;
-extern int max_y;
+#include "lem_in.h"
 
 t_ants	*create_ant(t_info *colonie, int i, SDL_Renderer *rend, SDL_Window *w)
 {

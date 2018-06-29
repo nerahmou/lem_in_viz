@@ -5,7 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/29 19:20:56 by nerahmou     #+#   ##    ##    #+#       */
+/*   Created: 2018/06/29 20:39:09 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:39:32 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +19,7 @@ int		check_digit(char *line)
 
 	i = 0;
 	while (line[i])
-		if (		ft_isdigit(line[i++]) == 0)
+		if (ft_isdigit(line[i++]) == 0)
 			return (1);
 	if (ft_strlen(line) >= 10 && ft_strcmp(line, "2147483647") > 0)
 		return (1);

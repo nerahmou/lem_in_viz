@@ -6,7 +6,7 @@
 /*   By: edbernie <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/24 11:18:08 by edbernie     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 19:08:32 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 20:44:22 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,9 +116,6 @@ typedef struct			s_info
 	SDL_Texture			*ant_image;
 
 	t_line				*lines;
-
-	Mix_Music			*music;
-	Mix_Chunk			*sound;
 }						t_info;
 
 void					ft_add_text(t_info *tab);

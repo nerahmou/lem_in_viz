@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   move_ants.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:12 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:54:53 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-void move_ant(t_ant_move *ant_move)
+void	move_ant(t_ant_move *ant_move)
 {
 	double		step;
 	double		dx;
@@ -24,10 +37,9 @@ void move_ant(t_ant_move *ant_move)
 	tmp_rect->y = check_go_over(dy > 0, tmp_rect->y, dest->y, ant_move);
 }
 
-
 void	move(t_ant_move *ant_move)
 {
-	t_ant_move *tmp;
+	t_ant_move	*tmp;
 
 	tmp = ant_move;
 	while (tmp)
@@ -39,7 +51,7 @@ void	move(t_ant_move *ant_move)
 }
 
 void	move_ants(t_info *colonie, char *str, SDL_Window *window,
-													SDL_Renderer *renderer)
+		SDL_Renderer *renderer)
 {
 	t_ants		*ant;
 	t_salle		*room;
@@ -49,9 +61,9 @@ void	move_ants(t_info *colonie, char *str, SDL_Window *window,
 	init_ant_to_move(colonie, &ant_move, str);
 	while (to_move(ant_move))
 	{
-			move(ant_move);
-			refresh(colonie, window, renderer);
-			SDL_Delay(10);
+		move(ant_move);
+		refresh(colonie, window, renderer);
+		SDL_Delay(10);
 	}
 	destroy_ant_to_move(&ant_move);
 }

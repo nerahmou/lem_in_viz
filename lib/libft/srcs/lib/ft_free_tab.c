@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_double_abs.c                                  .::    .:/ .      .::   */
+/*   ft_free_tab.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/29 21:02:57 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 21:02:59 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/06/29 20:46:21 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:47:16 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double	ft_double_abs(double d)
+void	free_tab(char **tab)
 {
-	if (d >= 0)
-		return (d);
-	return (-d);
+	int i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+			ft_strdel(&tab[i++]);
+		free(tab);
+	}
 }

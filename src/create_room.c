@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   create_room.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:34 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:53:52 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-extern int w;
-extern int h;
-extern int max_x;
-extern int max_y;
-extern SDL_Color White;
+extern int g_w;
+extern int g_h;
+extern int g_max_x;
+extern int g_max_y;
+extern SDL_Color g_white;
 
 int		check_room_index(t_room **room, int index, t_info *colonie,
 		SDL_Renderer *renderer)
@@ -34,7 +47,7 @@ int		set_text_room(t_room *new, char *name, t_info *colonie,
 {
 	SDL_Surface *surface;
 
-	surface = TTF_RenderText_Solid(colonie->style, name, White);
+	surface = TTF_RenderText_Solid(colonie->style, name, g_white);
 	if (!surface)
 		return (1);
 	new->room_text_t = SDL_CreateTextureFromSurface(renderer, surface);
@@ -53,8 +66,8 @@ t_room	*create_room(t_info *colonie, t_salle **salle, SDL_Renderer *renderer,
 	if (!(new = malloc(sizeof(*new))))
 		exit(1);
 	tmp = colonie->room;
-	(*salle)->x = ((*salle)->x * w) / max_x;
-	(*salle)->y = ((*salle)->y * h) / max_y;
+	(*salle)->x = ((*salle)->x * g_w) / g_max_x;
+	(*salle)->y = ((*salle)->y * g_h) / g_max_y;
 	new->room_rect = set_rec((*salle)->x, (*salle)->y, 50, 50);
 	new->room_text_r = set_rec((*salle)->x - 25, (*salle)->y - 80, 100, 80);
 	new->room = NULL;
@@ -73,7 +86,6 @@ t_room	*create_room(t_info *colonie, t_salle **salle, SDL_Renderer *renderer,
 		colonie->room = new;
 	return (colonie->room);
 }
-
 
 void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 {

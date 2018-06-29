@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   move_ants2.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:07 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:56:28 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 void		destroy_ant_to_move(t_ant_move **ant_move)
@@ -31,7 +44,7 @@ t_ant_move	*push_ant_move(t_ant_move *ant_move, t_ants *ant, t_salle *room)
 	if (tmp)
 	{
 		while (tmp->next)
-		tmp = tmp->next;
+			tmp = tmp->next;
 		tmp->next = new;
 	}
 	else
@@ -40,7 +53,7 @@ t_ant_move	*push_ant_move(t_ant_move *ant_move, t_ants *ant, t_salle *room)
 }
 
 t_ant_move	*init_ant_to_move(t_info *colonie, t_ant_move **ant_move,
-																	char *str)
+		char *str)
 {
 	int			i;
 	t_ants		*ant;
@@ -50,11 +63,11 @@ t_ant_move	*init_ant_to_move(t_info *colonie, t_ant_move **ant_move,
 
 	i = -1;
 	if (!(moves = ft_strsplit(str, ' ')))
-		exit (1);
+		exit(1);
 	while (moves[++i])
 	{
 		if (!(ant_and_room = ft_strsplit(moves[i], '-')))
-			exit (1);
+			exit(1);
 		ant = get_ant_from_name(colonie->ants, ant_and_room[0]);
 		room = get_room_by_name(colonie->salle, ant_and_room[1]);
 		*ant_move = push_ant_move(*ant_move, ant, room);
@@ -65,7 +78,7 @@ t_ant_move	*init_ant_to_move(t_info *colonie, t_ant_move **ant_move,
 	return (NULL);
 }
 
-int		to_move(t_ant_move *ant_move)
+int			to_move(t_ant_move *ant_move)
 {
 	t_ant_move *tmp;
 
@@ -79,7 +92,8 @@ int		to_move(t_ant_move *ant_move)
 	return (0);
 }
 
-int	check_go_over(int positive, int src, int dest, t_ant_move *ant_move)
+int			check_go_over(int positive, int src, int dest,
+		t_ant_move *ant_move)
 {
 	if (positive)
 	{
@@ -87,13 +101,15 @@ int	check_go_over(int positive, int src, int dest, t_ant_move *ant_move)
 		{
 			ant_move->to_move = false;
 			return (src - (src - dest));
-			}
+		}
 	}
 	else
+	{
 		if (src < dest)
 		{
 			ant_move->to_move = false;
 			return (src + (dest - src));
 		}
+	}
 	return (src);
 }

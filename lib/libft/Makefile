@@ -6,7 +6,7 @@
 #    By: nerahmou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 09:17:07 by nerahmou          #+#    #+#              #
-#    Updated: 2018/06/29 19:29:35 by nerahmou    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/29 20:48:09 by nerahmou    ###    #+. /#+    ###.fr      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,8 @@ FILES_LIB =	ft_memchr.c\
 		ft_lstlen.c\
 		ft_tablength.c\
 		ft_strchr_occur.c\
-		ft_double_abs.c
+		ft_double_abs.c\
+		ft_free_tab.c
 
 OBJ_LIB = $(addprefix $(PATH_OBJ_LIB), $(FILES_LIB:.c=.o))
 SRC_LIB = $(addprefix $(PATH_SRC_LIB), $(FILES_LIB))

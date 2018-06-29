@@ -6,7 +6,7 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/29 13:51:21 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/21 17:10:30 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 21:01:35 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <wchar.h>
 # include "ft_printf.h"
-
 
 typedef struct		s_list
 {
@@ -119,5 +118,6 @@ size_t				ft_char_pos(char *str, char c);
 int					ft_countwords(char *str, char c);
 int					ft_intlen(intmax_t n, int base);
 size_t				ft_lstlen(t_queue *queue);
-double	ft_double_abs(double d);
+double				ft_double_abs(double d);
+void				free_tab(char **tab);
 #endif

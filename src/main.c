@@ -6,24 +6,21 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/23 16:04:05 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 18:57:09 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 20:53:04 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int w;
-int h;
-int max_x = 1;
-int max_y = 1;
+int g_w;
+int g_h;
+int g_max_x = 1;
+int g_max_y = 1;
+SDL_Color g_white = {255, 250, 250};
+SDL_Color g_red = {220, 20, 60};
 
-SDL_Color White = {255,250,250};
-SDL_Color Red = {220,20,60};
-SDL_Color Green = {0, 255, 0};
-
-
-int	get_colonie(t_info *colonie)
+int		get_colonie(t_info *colonie)
 {
 	while (get_next_line(0, &colonie->line) && ft_strcmp("", colonie->line))
 	{
@@ -46,7 +43,7 @@ void	file_puts(t_info *colonie)
 	}
 }
 
-int main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
@@ -62,5 +59,5 @@ int main(int argc, char *argv[])
 	lseek(colonie.fd, 0, SEEK_SET);
 	get_events(colonie, window, renderer);
 	exit_viz(&colonie, renderer, window, 0);
-	return 0;
+	return (0);
 }

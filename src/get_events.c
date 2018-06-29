@@ -1,27 +1,36 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   get_events.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:23 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 20:51:30 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
+bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 {
-	char	*str;
-	SDL_Event e;
+	char		*str;
+	SDL_Event	e;
 
-	while(SDL_PollEvent(&e))
+	while (SDL_PollEvent(&e))
 	{
-		switch(e.type)
+		if (e.type == SDL_KEYDOWN)
 		{
-			case SDL_KEYDOWN:
-				switch(e.key.keysym.sym)
-				{ 
-					case SDLK_ESCAPE:
-						return (1);
-						break;
-					case SDLK_SPACE:
-						if (!get_next_line(colonie->fd, &str))
-							return (1);
-						move_ants(colonie, str, window, renderer);
-						ft_strdel(&str);
-						break;
-				}
+			if (e.key.keysym.sym == SDLK_ESCAPE)
+				return (1);
+			else if (e.key.keysym.sym == SDLK_SPACE)
+			{
+				if (!get_next_line(colonie->fd, &str))
+					return (1);
+				move_ants(colonie, str, window, rend);
+				ft_strdel(&str);
+			}
 		}
 	}
 	return (0);
@@ -29,7 +38,7 @@ bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 
 void	get_events(t_info colonie, SDL_Window *window, SDL_Renderer *renderer)
 {
-	bool	quit;
+	bool		quit;
 
 	quit = false;
 	while (!quit)

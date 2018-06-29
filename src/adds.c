@@ -6,15 +6,15 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 19:27:01 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 19:28:44 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 20:30:03 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-extern int max_x;
-extern int max_y;
+extern int g_max_x;
+extern int g_max_y;
 
 t_salle	*add_salle(t_salle *salle_co, char **salle, int index)
 {
@@ -27,10 +27,10 @@ t_salle	*add_salle(t_salle *salle_co, char **salle, int index)
 	link->index = index;
 	link->x = ft_atoi(salle[1]) + 2;
 	link->y = ft_atoi(salle[2]) + 2;
-	if (link->x > max_x)
-		max_x = link->x;
-	if (link->y > max_y)
-		max_y = link->y;
+	if (link->x > g_max_x)
+		g_max_x = link->x;
+	if (link->y > g_max_y)
+		g_max_y = link->y;
 	link->is_full = 0;
 	link->next = NULL;
 	link->co = NULL;

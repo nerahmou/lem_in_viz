@@ -1,21 +1,35 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   exit.c                                           .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/06/29 20:29:27 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/29 21:03:45 by nerahmou    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int signal)
+void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int sig)
 {
 	SDL_DestroyRenderer(rend);
 	SDL_DestroyWindow(win);
 	nettoyage_colonie(colonie);
 	SDL_Quit();
-	exit(signal);
+	exit(sig);
 }
 
-void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win, t_info *colonie)
+void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win,
+															t_info *colonie)
 {
 	SDL_Log("Error : %s > %s\n", str, SDL_GetError());
 	exit_viz(colonie, rend, win, 1);
 }
 
-void		ft_error(t_info *colonie)
+void	ft_error(t_info *colonie)
 {
 	ft_printf("Error\n");
 	nettoyage_colonie(colonie);
