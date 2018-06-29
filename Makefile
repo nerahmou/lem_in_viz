@@ -6,7 +6,7 @@
 #    By: befuhro <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/30 13:54:18 by befuhro      #+#   ##    ##    #+#        #
-#    Updated: 2018/06/29 19:30:37 by nerahmou    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/29 19:37:36 by nerahmou    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -59,16 +59,16 @@ NAME = viz
 all: $(NAME)
 
 $(NAME): $(OBJ_LEM_PATH) $(OBJ)
-	make -C $(LIB_PATH)libft 
-	mv $(LIB_PATH)libft/libft.a $(LIB_PATH)
-	$(CC) -I $(LIB_PATH) -L lib/ -lft $(INCLUDES_VISU)  $(LIB_VISU)  $(OBJ) -o $@
+	@make -C $(LIB_PATH)libft 
+	@mv $(LIB_PATH)libft/libft.a $(LIB_PATH)
+	@$(CC) -I $(LIB_PATH) -L lib/ -lft $(INCLUDES_VISU)  $(LIB_VISU)  $(OBJ) -o $@
 	@echo "Viz created 👍 \n"
 
 $(OBJ_LEM_PATH):
 	@mkdir $@
 
 $(OBJ_LEM_PATH)%.o: $(LEM_PATH)%.c $(INCLUDES_FILES)
-	$(CC) $(INCLUDES_VISU) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
+	@$(CC) $(INCLUDES_VISU) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ_LEM_PATH)
