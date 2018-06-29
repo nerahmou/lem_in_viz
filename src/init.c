@@ -34,9 +34,7 @@ void	init_sound(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 	Mix_AllocateChannels(2);
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) == -1)
 		exit_with_erro("Init SOUND", renderer, window, colonie);
-	colonie->music = Mix_LoadMUS("test.mp3");
-	Mix_PlayMusic(colonie->music, -1);
-	colonie->sound = Mix_LoadWAV("ryu.wav");
+	colonie->sound = Mix_LoadWAV("audio/ryu.wav");
 	if (!colonie->sound)
 		exit_with_erro("Load WAV ", renderer, window, colonie);
 }
