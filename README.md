@@ -6,6 +6,5 @@
 
 #USE : 
 
-- make in the lem_in_viz repo
-
-- run : "./lem-in < [text file] | ./lem_in_viz/viz"
+- make
+- ./lem-in < [text file] | ./lem_in_viz/viz
