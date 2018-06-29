@@ -18,7 +18,6 @@ bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 					case SDLK_SPACE:
 						if (!get_next_line(colonie->fd, &str))
 							return (1);
-						Mix_PlayChannel(1, colonie->sound, 0);
 						move_ants(colonie, str, window, renderer);
 						ft_strdel(&str);
 						break;
@@ -31,7 +30,6 @@ bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer)
 void	get_events(t_info colonie, SDL_Window *window, SDL_Renderer *renderer)
 {
 	bool	quit;
-	init_sound(&colonie, window, renderer);
 
 	quit = false;
 	while (!quit)
