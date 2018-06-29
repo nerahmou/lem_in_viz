@@ -13,6 +13,8 @@
 
 .PHONY: all clean fclean re
 
+CC = clang -g
+
 _END=$'\x1b[0m
 _BOLD=$'\x1b[1m
 _UNDER=$'\x1b[4m
@@ -42,16 +44,37 @@ SRC_LEM =	main.c\
 			init.c\
 			move_ants.c\
 			move_ants2.c
-			
 
 SRC_LEM_IN = $(addprefix $(LEM_PATH),$(SRC_LEM))
 OBJ_LEM_PATH = obj/
 OBJ_LEM = $(SRC_LEM:.c=.o)
 OBJ = $(addprefix $(OBJ_LEM_PATH),$(OBJ_LEM))
 INCLUDES_PATH = include/
+INCLUDES_FILES = $(INCLUDES_PATH)lem_in.h
+LIB_PATH = lib/
+LIB_FILES = -lft\
+			-lSDL2\
+			-lSDL2_image\
+			-lSDL2_mixer\
+			-lSDL2_ttf
 CC = clang -g
 NAME = viz
 
+all: $(NAME)
 
-all:
-	gcc  $(SRC_LEM_IN) -o viz -I include -L lib -lft -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer
+$(NAME): $(OBJ_LEM_PATH) $(OBJ) $(INCLUDES_FILES)
+	$(CC) -I $(INCLUDES_PATH) -L lib $(LIB_FILES) $(OBJ) -o $@
+
+$(OBJ_LEM_PATH):
+	mkdir $@
+
+$(OBJ_LEM_PATH)%.o:$(LEM_PATH)%.c
+	$(CC) -c -I $(INCLUDES_PATH) -o $@ $<
+
+clean:
+	rm -rf $(OBJ_LEM_PATH)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
