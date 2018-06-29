@@ -8,3 +8,6 @@
 
 - make
 - ./lem-in < [text file] | ./lem_in_viz/viz
+
+
+![alt text] (https://github.com/nessman69/lem_in_viz/blob/master/img/image.png)
