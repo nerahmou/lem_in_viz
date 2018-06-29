@@ -6,7 +6,7 @@
 #    By: befuhro <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/30 13:54:18 by befuhro      #+#   ##    ##    #+#        #
-#    Updated: 2018/06/22 20:31:08 by nerahmou    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/29 19:30:37 by nerahmou    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -46,25 +46,29 @@ SRC_LEM_IN = $(addprefix $(LEM_PATH),$(SRC_LEM))
 OBJ_LEM_PATH = obj/
 OBJ = $(addprefix $(OBJ_LEM_PATH), $(SRC_LEM:.c=.o))
 INCLUDES_PATH = include/
-INCLUDES_FILES = $(INCLUDES_PATH)lem_in.h
+INCLUDES_FILES = $(INCLUDES_PATH)*
+
 LIB_PATH = ./lib/
-INC_LIBS = -l ft -l SDL2 -l SDL2main -l SDL2_test -l SDL2_image -l SDL2_mixer -l SDL2_ttf
+INCLUDES_VISU= -I ~/.brew/include/SDL2/
+
+LIB_VISU= -L ~/.brew/lib -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
+
 CC = gcc -g
 NAME = viz
 
 all: $(NAME)
 
 $(NAME): $(OBJ_LEM_PATH) $(OBJ)
-	@make -C $(LIB_PATH)libft re
-	@mv $(LIB_PATH)libft/libft.a ..
-	@$(CC) -L $(LIB_PATH) $(INC_LIBS) $(OBJ) -I $(LIB_PATH) -o $@
+	make -C $(LIB_PATH)libft 
+	mv $(LIB_PATH)libft/libft.a $(LIB_PATH)
+	$(CC) -I $(LIB_PATH) -L lib/ -lft $(INCLUDES_VISU)  $(LIB_VISU)  $(OBJ) -o $@
 	@echo "Viz created 👍 \n"
 
 $(OBJ_LEM_PATH):
 	@mkdir $@
 
 $(OBJ_LEM_PATH)%.o: $(LEM_PATH)%.c $(INCLUDES_FILES)
-	@$(CC) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
+	$(CC) $(INCLUDES_VISU) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ_LEM_PATH)

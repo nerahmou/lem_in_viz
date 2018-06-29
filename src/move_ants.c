@@ -51,7 +51,7 @@ void	move_ants(t_info *colonie, char *str, SDL_Window *window,
 	{
 			move(ant_move);
 			refresh(colonie, window, renderer);
-			SDL_Delay(30);
+			SDL_Delay(10);
 	}
 	destroy_ant_to_move(&ant_move);
 }

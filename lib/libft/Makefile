@@ -6,7 +6,7 @@
 #    By: nerahmou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 09:17:07 by nerahmou          #+#    #+#              #
-#    Updated: 2018/03/07 07:35:58 by nerahmou    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/29 19:29:35 by nerahmou    ###    #+. /#+    ###.fr      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -187,7 +187,7 @@ $(PATHS_OBJ):
 $(PATH_OBJ)%.o: $(PATH_SRC)%.c
 	@echo "[$(_BOLD)$(_IRED)$(notdir $<)\033[0;0m] -> [$(_BOLD)$(_IGREEN)$(notdir $@)\033[0;0m]"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INC)
-	clear
+	@clear
 
 clean:
 	@rm -rf $(PATH_OBJ)
