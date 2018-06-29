@@ -68,8 +68,10 @@ $(OBJ_LEM_PATH)%.o: $(LEM_PATH)%.c $(INCLUDES_FILES)
 
 clean:
 	@rm -rf $(OBJ_LEM_PATH)
+	@make -C $(LIB_PATH)libft clean
 
 fclean: clean
+	@make -C $(LIB_PATH)libft fclean
 	@rm -f $(NAME)
 
 re: fclean all
