@@ -6,7 +6,7 @@
 /*   By: edbernie <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/24 11:18:08 by edbernie     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/30 11:09:38 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/30 10:41:43 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,39 +14,39 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#include "libft.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+# include "libft.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include <SDL.h>
+# include <SDL_image.h>
+# include <SDL_ttf.h>
 
-typedef struct			s_salle t_salle;
+typedef struct s_salle	t_salle;
 
 typedef struct			s_connection
 {
 	t_salle				*salle;
-	struct s_connection *next;
+	struct s_connection	*next;
 }						t_connection;
 
-typedef struct 			s_salle
+struct					s_salle
 {
-	int		 			index;
+	int					index;
 	char				*name;
 	int					x;
 	int					y;
 	int					is_full;
 	t_connection		*co;
-	struct s_salle 		*next;
-}						t_salle;
+	struct s_salle		*next;
+};
 
 typedef struct			s_chemins
 {
 	size_t				length;
 	size_t				nb_connections;
 	size_t				nb_tosend;
-	struct s_chemins 	*next;
+	struct s_chemins	*next;
 }						t_chemins;
 
 typedef struct			s_room
@@ -82,7 +82,7 @@ typedef struct			s_line
 	int					src_y;
 	int					dst_x;
 	int					dst_y;
-	struct	s_line		*next;
+	struct s_line		*next;
 }						t_line;
 
 typedef struct			s_info
@@ -128,7 +128,7 @@ int						check_digit(char *line);
 int						duplicate_room(t_info *colonie);
 int						room_exist(t_salle *salle, char *tab);
 int						duplicate_liaison(t_salle *salle, char **tab);
-int 					ft_check_line(t_info *colonie);
+int						ft_check_line(t_info *colonie);
 void					ft_check_and_add(t_info *colonie);
 
 int						get_room(t_info *colonie);
@@ -142,9 +142,7 @@ void					*get_next_chemin(void *lst);
 t_chemins				*get_last_chemin(t_chemins *chemin);
 t_salle					*get_room_by_name(t_salle *salle, char *name);
 t_chemins				*get_paths(t_info *colonie);
-
 void					select_path(t_info *colonie);
-
 
 void					ft_print_liaisons(t_salle *salle);
 void					ft_print_list(t_info *colonie);
@@ -152,37 +150,53 @@ void					ft_print_chemins(t_chemins *chemin);
 void					ft_print_chemins_rev(t_chemins *chemin);
 
 void					free_tab(char **tab);
-void	free_multi_str(const char *str, ...);
+void					free_multi_str(const char *str, ...);
 t_connection			*nettoyage_connections(t_connection *connection);
 t_salle					*nettoyage_salles(t_salle *salle);
 void					*nettoyage_colonie(t_info *colonie);
 void					exit_error(t_info *colonie);
 void					ft_error(t_info *colonie);
 
-void	init_colonie(t_info *colonie);
-void	init_sound(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
+void					init_colonie(t_info *colonie);
+void					init_sound(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *rend);
 
-void	create_viz(SDL_Window **window, SDL_Renderer **renderer, t_info *colonie);
-void	get_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-void	get_lines(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-void	get_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-t_ants	*get_ant_from_name(t_ants *ants, char *name);
-void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int signal);
-void	exit_with_erro(const char *str, SDL_Renderer *rend, SDL_Window *win, t_info *colonie);
+void					create_viz(SDL_Window **window, SDL_Renderer **rend,
+		t_info *colonie);
+void					get_rooms(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+void					get_lines(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+void					get_ants(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+t_ants					*get_ant_from_name(t_ants *ants, char *name);
+void					exit_viz(t_info *colonie, SDL_Renderer *rend,
+		SDL_Window *win, int sig);
+void					exit_with_erro(const char *str, SDL_Renderer *rend,
+		SDL_Window *win, t_info *colonie);
 
-void	get_events(t_info colonie, SDL_Window *window, SDL_Renderer *renderer);
-SDL_Rect	*set_rec(int x, int y, int w, int h);
-void	set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-void	set_background_and_text_style(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-void	set_options_menu(t_info *colonie, SDL_Window *window, SDL_Renderer *renderer);
-SDL_Color	*set_color(int r, int g, int b, int a);
+void					get_events(t_info colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+SDL_Rect				*set_rec(int x, int y, int w, int h);
+void					set_text(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+void					set_background_and_text_style(t_info *colonie,
+		SDL_Window *window, SDL_Renderer *renderer);
+void					set_options_menu(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *renderer);
+SDL_Color				*set_color(int r, int g, int b, int a);
 
-void		move_ants(t_info *colonie, char *str, SDL_Window *window, SDL_Renderer *renderer);
-int			to_move(t_ant_move *ant_move);
-int			check_go_over(int positive, int src, int dest, t_ant_move *ant_move);
-t_ant_move	*init_ant_to_move(t_info *colonie, t_ant_move **ant_move, char *str);
-t_ant_move	*push_ant_move(t_ant_move *ant_move, t_ants *ant, t_salle *room);
-void		destroy_ant_to_move(t_ant_move **ant_move);
+void					move_ants(t_info *colonie, char *str,
+		SDL_Window *window, SDL_Renderer *renderer);
+int						to_move(t_ant_move *ant_move);
+int						check_go_over(int positive, int src, int dest,
+		t_ant_move *ant_move);
+t_ant_move				*init_ant_to_move(t_info *colonie,
+		t_ant_move **ant_move, char *str);
+t_ant_move				*push_ant_move(t_ant_move *ant_move,
+		t_ants *ant, t_salle *room);
+void					destroy_ant_to_move(t_ant_move **ant_move);
 
-void		refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend);
+void					refresh(t_info *colonie, SDL_Window *window,
+		SDL_Renderer *rend);
 #endif

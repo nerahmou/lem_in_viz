@@ -1,14 +1,14 @@
-3
+5
 ##start
 start 0 0
 ##end
-end 1 1
-long0 2 2
+end 4 3
+long0 1 3
 long1 3 3
-short 4 4
-longer0 5 5
-longer1 6 6
-longer2 7 7
+short 4 0
+longer0 0 6
+longer1 4 6
+longer2 6 4
 start-long0
 long0-long1
 long1-end

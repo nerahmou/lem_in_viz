@@ -6,7 +6,7 @@
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/29 20:29:27 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 21:03:45 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/30 12:13:17 by edbernie    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@ void	exit_viz(t_info *colonie, SDL_Renderer *rend, SDL_Window *win, int sig)
 	SDL_DestroyWindow(win);
 	nettoyage_colonie(colonie);
 	SDL_Quit();
+	system("rm -f moves && rm -f ../moves 2> /dev/null");
 	exit(sig);
 }
 

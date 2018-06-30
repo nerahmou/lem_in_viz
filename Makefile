@@ -6,7 +6,7 @@
 #    By: befuhro <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/30 13:54:18 by befuhro      #+#   ##    ##    #+#        #
-#    Updated: 2018/06/29 20:47:49 by nerahmou    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/30 10:43:57 by nerahmou    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -51,7 +51,7 @@ INCLUDES_FILES = $(INCLUDES_PATH)*
 LIB_PATH = ./lib/
 INCLUDES_VISU= -I ~/.brew/include/SDL2/
 
-LIB_VISU= -L ~/.brew/lib -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
+LIB_VISU= -L ~/.brew/lib -lSDL2 -lSDL2_ttf -lSDL2_image
 
 CC = gcc -g
 NAME = viz
