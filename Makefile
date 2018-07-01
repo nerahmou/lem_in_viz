@@ -49,7 +49,7 @@ INCLUDES_PATH = include/
 INCLUDES_FILES = $(INCLUDES_PATH)*
 
 LIB_PATH = ./lib/
-INCLUDES_VISU= -I ~/.brew/include/SDL2/
+INCLUDES_VISU= -I ~/.brew/include/
 
 LIB_VISU= -L ~/.brew/lib -lSDL2 -lSDL2_ttf -lSDL2_image
 
