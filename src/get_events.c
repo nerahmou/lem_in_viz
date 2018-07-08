@@ -27,7 +27,8 @@ bool	which_event(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 			else if (e.key.keysym.sym == SDLK_SPACE)
 			{
 				if (!get_next_line(colonie->fd, &str))
-					return (1);
+					continue ;
+				colonie->nb_moves++;
 				move_ants(colonie, str, window, rend);
 				ft_strdel(&str);
 			}

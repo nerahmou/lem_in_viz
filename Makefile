@@ -68,6 +68,7 @@ $(OBJ_LEM_PATH):
 	@mkdir $@
 
 $(OBJ_LEM_PATH)%.o: $(LEM_PATH)%.c $(INCLUDES_FILES)
+	echo users
 	@$(CC) $(INCLUDES_VISU) -I $(INCLUDES_PATH) -I $(LIB_PATH) -o $@ -c $<
 
 clean:

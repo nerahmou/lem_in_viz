@@ -50,9 +50,16 @@ void		set_text(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	char		*tmp;
 	char		*tmp2;
 
-	tmp = ft_itoa(colonie->nb_moves);
-	text = ft_strjoin("Nombre de coups : ", tmp);
+	tmp2 = ft_itoa(colonie->nb_moves);
+	text = ft_strjoin("Nombre de coups : ", tmp2);
+	ft_strdel(&tmp2);
+	tmp = ft_itoa(colonie->nb_moves_total);
+	tmp2 = ft_strjoin("/", tmp);
 	ft_strdel(&tmp);
+	tmp = text;
+	text = ft_strjoin(text, tmp2);
+	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
 	tmp = ft_itoa(colonie->nb);
 	tmp2 = ft_strjoin(" | Nombre de fourmis : ", tmp);
 	ft_strdel(&tmp);

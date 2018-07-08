@@ -96,6 +96,7 @@ typedef struct			s_info
 	t_salle				*salle;
 
 	int					nb_moves;
+	int					nb_moves_total;
 	int					fd;
 
 	TTF_Font			*style;

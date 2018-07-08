@@ -24,6 +24,7 @@ void	init_colonie(t_info *colonie)
 	colonie->salle = NULL;
 	colonie->ants = NULL;
 	colonie->nb_moves = 0;
+	colonie->nb_moves_total = 0;
 	colonie->room = NULL;
 	colonie->ants = NULL;
 	colonie->ant_image = NULL;

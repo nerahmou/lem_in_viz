@@ -89,7 +89,6 @@ void			*nettoyage_colonie(t_info *colonie)
 	SDL_DestroyTexture(colonie->options_menu_text);
 	SDL_DestroyTexture(colonie->ant_image);
 	free(colonie->bg_rect);
-	free(colonie->nb_moves_rect);
 	free(colonie->options_menu_rect);
 	while (colonie->lines)
 	{

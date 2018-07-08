@@ -36,7 +36,7 @@ void	file_puts(t_info *colonie)
 
 	while (get_next_line(0, &colonie->line))
 	{
-		colonie->nb_moves++;
+		colonie->nb_moves_total++;
 		write(colonie->fd, colonie->line, ft_strlen(colonie->line));
 		write(colonie->fd, "\n", 1);
 		ft_strdel(&colonie->line);

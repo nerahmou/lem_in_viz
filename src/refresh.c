@@ -13,6 +13,8 @@
 
 #include "lem_in.h"
 
+extern int g_h;
+
 void	refresh_ants(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 {
 	t_ants *ants;
@@ -54,6 +56,19 @@ void	refresh_rooms(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	}
 }
 
+void	refresh_text(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
+{
+	free(colonie->nb_moves_rect);
+	colonie->nb_moves_rect = NULL;
+	SDL_DestroyTexture(colonie->nb_moves_text);
+	g_h += (g_h / 3);
+	set_text(colonie, window, rend);
+	g_h -= (g_h / 4);
+	if (SDL_RenderCopy(rend, colonie->options_menu_text, NULL,
+				colonie->options_menu_rect) < 0)
+		exit_with_erro("Render copy3", rend, window, colonie);
+}
+
 void	refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 {
 	t_line	*line;
@@ -66,9 +81,9 @@ void	refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	if (SDL_RenderCopy(rend, colonie->nb_moves_text, NULL,
 				colonie->nb_moves_rect) < 0)
 		exit_with_erro("Render copy2", rend, window, colonie);
-	if (SDL_RenderCopy(rend, colonie->options_menu_text, NULL,
-				colonie->options_menu_rect) < 0)
-		exit_with_erro("Render copy3", rend, window, colonie);
+	//if (SDL_RenderCopy(rend, colonie->options_menu_text, NULL,
+	//			colonie->options_menu_rect) < 0)
+	//	exit_with_erro("Render copy3", rend, window, colonie);
 	SDL_SetRenderDrawColor(rend, 255, 255, 255, 0);
 	while (line)
 	{
@@ -77,6 +92,7 @@ void	refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 			exit_with_erro("Render DrawLine", rend, window, colonie);
 		line = line->next;
 	}
+	refresh_text(colonie, window, rend);
 	refresh_rooms(colonie, window, rend);
 	refresh_ants(colonie, window, rend);
 	SDL_RenderPresent(rend);
