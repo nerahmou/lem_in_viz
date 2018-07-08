@@ -81,9 +81,6 @@ void	refresh(t_info *colonie, SDL_Window *window, SDL_Renderer *rend)
 	if (SDL_RenderCopy(rend, colonie->nb_moves_text, NULL,
 				colonie->nb_moves_rect) < 0)
 		exit_with_erro("Render copy2", rend, window, colonie);
-	//if (SDL_RenderCopy(rend, colonie->options_menu_text, NULL,
-	//			colonie->options_menu_rect) < 0)
-	//	exit_with_erro("Render copy3", rend, window, colonie);
 	SDL_SetRenderDrawColor(rend, 255, 255, 255, 0);
 	while (line)
 	{
